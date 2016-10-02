@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'neo4j'),
 
     /*
     |--------------------------------------------------------------------------
@@ -82,8 +82,8 @@ return [
             'driver' => 'neo4j',
             'host'   => 'localhost',
             'port'   => '7474',
-            'username' => 'neo4j',
-            'password' => 'voodoo2'
+            'username' => env('DB_USERNAME', ''),
+            'password' => env('DB_PASSWORD', ''),
         ],
 
     ],
