@@ -50,4 +50,39 @@ class TermController extends Controller
 
 		return Redirect::to('/terms/')->with('message', 'Term created.');
 	}
+
+	public function edit(Term $term)
+	{
+		//check if id property exists
+		if (!$term->id) {
+			abort(403, 'This term no longer exists in the database.');
+		}
+
+		return view('terms.edit', compact('term'));
+	}
+
+	public function update(Term $term, Request $request)
+	{
+		//validate input form
+		$this->validate($request, [
+			'term_name' => 'required|min:3',
+			'term_definition' => 'required'
+		]);
+
+		$term->update($request->all());
+
+		return Redirect::to('/terms/')->with('message', 'Term updated.');
+	}
+
+	public function destroy(Term $term)
+	{
+		//check if id property exists
+		if (!$term->id) {
+			abort(403, 'This term no longer exists in the database.');
+		}
+		//delete term
+		$term->delete();
+
+		return Redirect::to('/terms/')->with('message', 'Term deleted.');
+	}
 }

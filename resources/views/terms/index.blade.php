@@ -19,12 +19,23 @@
 		<tr class="info">
 			<td class="header">Term name</td>
 			<td class="header">Term definition</td>
+			@if (Auth::check())
+				 <td class="header" style="width: 190px;">Options</td>
+			@endif
 		</tr>
 
 		@foreach( $terms as $term )
 			<tr>
 				<td>{{ $term->term_name }}</td>
 				<td>{{ $term->term_definition }}</td>
+				<td>
+					@if (Auth::check())
+						{!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('terms.destroy', $term->id), 'onsubmit' => 'return confirm(\'Are you sure to delete this terms?\')')) !!}
+						{!! link_to_route('terms.edit', 'Edit', array($term->id), array('class' => 'btn btn-info btn-xs')) !!}
+						{!! Form::submit('Delete', array('class' => 'btn btn-danger btn-xs', 'style' => 'margin-left:3px;')) !!}
+						{!! Form::close() !!}
+					@endcan
+				</td>
 			</tr>
 		@endforeach
 
