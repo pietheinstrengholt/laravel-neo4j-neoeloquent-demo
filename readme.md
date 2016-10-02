@@ -1,10 +1,10 @@
-Business Information Model Tool
+Laravel Neo4j Neoeloquent Demo
 =======
 Copyright (c) 2016 Piethein Strengholt, piethein@strengholt-online.nl
 
 ABOUT
 ------------
-This is a demo website with Laravel 5 utilizing a Neo4j graph database with NeoEloquent OGM. It is written in PHP/Laravel + jQuery / HTML / CSS (Bootstrap).
+This is a demo website with Laravel 5 utilizing a Neo4j graph database with NeoEloquent OGM. Goal is to make a Proof of Concept to demonstrate Laravel can be used with a Neo4j graph database backend. It is written in PHP/Laravel + jQuery / HTML / CSS (Bootstrap).
 
 REQUIREMENTS
 ------------
