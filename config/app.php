@@ -160,6 +160,7 @@ return [
          * Custom Service Providers...
          */
 		Collective\Html\HtmlServiceProvider::class,
+		Vinelab\NeoEloquent\NeoEloquentServiceProvider::class,
 
     ],
 
