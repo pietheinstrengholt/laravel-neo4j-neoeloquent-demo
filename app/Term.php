@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\User;
+//use App\User;
 use NeoEloquent;
 
 class Term extends NeoEloquent
