@@ -1,27 +1,52 @@
-# Laravel PHP Framework
+Business Information Model Tool
+=======
+Copyright (c) 2016 Piethein Strengholt, piethein@strengholt-online.nl
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+ABOUT
+------------
+This is a demo website with Laravel 5 utilizing a Neo4j graph database with NeoEloquent OGM. It is written in PHP/Laravel + jQuery / HTML / CSS (Bootstrap).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+REQUIREMENTS
+------------
+* PHP >= 5.5.9
+* OpenSSL PHP Extension
+* Mbstring PHP Extension
+* Tokenizer PHP Extension
+* Composer
+* Git
+* Neo4j database
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+INITIAL DEPLOYMENT
+------------
+* install Neo4j. I used a docker container for this: `docker run -d --publish=7474:7474 --publish=7687:7687 --volume=$HOME/neo4j/data:/data neo4j:3.0`
+* install composer: `curl -sS https://getcomposer.org/installer | php — –filename=composer`
+* ssh to the machine, go the www directory
+* clone the repository: `git clone https://github.com/pietheinstrengholt/laravel-neo4j-neoeloquent-demo.git .`
+* run `composer install --no-dev --optimize-autoloader` , use your github key when asked.
+* copy the `.env.example` to `.env` and configure with the correct database settings. If localhost doesn't work, try 127.0.0.1 instead.
+* change the following variables:
 
-## Official Documentation
+```
+DB_CONNECTION=neo4j
+DB_HOST=127.0.0.1
+DB_PORT=7474
+DB_USERNAME=neo4j
+DB_PASSWORD=neo4j
+```
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+* run `php artisan key:generate` to generate an unique key. Add this key to the .env configuration file
+* deploy the database, use the following command: `php artisan neo4j:migrate`
+* run `php artisan optimize`
+* run `php artisan cache:clear`
+* run `mkdir -p bootstrap/cache`
+* run `mkdir -p storage/framework/cache`
+* run `chmod -R 777 storage/`
+* run `composer dump-autoload`
+* run `php artisan up`
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+TODO
+------------
+* Fix user registration (violation of primary key)
+* Extend a little bit more
+* Add some nice d3js visualisation
