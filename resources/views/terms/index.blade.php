@@ -24,7 +24,7 @@
 		@foreach( $terms as $term )
 			<tr>
 				<td>{{ $term->term_name }}</td>
-				<td>{{ $term->term_defition }}</td>
+				<td>{{ $term->term_definition }}</td>
 			</tr>
 		@endforeach
 

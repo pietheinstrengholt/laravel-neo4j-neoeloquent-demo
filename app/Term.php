@@ -2,7 +2,6 @@
 
 namespace App;
 
-//use App\User;
 use NeoEloquent;
 
 class Term extends NeoEloquent
@@ -12,7 +11,7 @@ class Term extends NeoEloquent
 	protected $guarded = [];
 	public $timestamps = false;
 
-	protected $fillable = ['term_name','term_description'];
+	protected $fillable = ['term_name','term_definition'];
 
 	public function author()
     {
