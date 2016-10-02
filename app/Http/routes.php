@@ -16,5 +16,14 @@ Route::get('/', function () {
     return view('index');
 });
 
-
 Route::auth();
+
+// Provide controller methods with object instead of ID
+Route::model('terms', 'Term');
+
+Route::bind('terms', function($value, $route) {
+	return App\Term::whereId($value)->first();
+});
+
+//Model routes
+Route::resource('terms', 'TermController');

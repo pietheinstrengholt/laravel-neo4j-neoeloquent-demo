@@ -3,8 +3,11 @@
 namespace App;
 
 use Illuminate\Auth\Authenticatable;
-use Vinelab\NeoEloquent\Eloquent\Relations\MorphMany;
-use Vinelab\NeoEloquent\Eloquent\Model as NeoEloquent;
+//use Vinelab\NeoEloquent\Eloquent\Relations\MorphMany;
+//use Vinelab\NeoEloquent\Eloquent\Edges\EdgeIn;
+//use Vinelab\NeoEloquent\Eloquent\Model as NeoEloquent;
+use NeoEloquent;
+use App\Phone;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -37,4 +40,9 @@ class User extends NeoEloquent implements
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+	public function terms()
+    {
+        return $this->hasMany('App\Term', 'CREATED');
+    }
 }
