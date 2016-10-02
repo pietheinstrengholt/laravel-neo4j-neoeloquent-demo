@@ -11,10 +11,10 @@
 |
 */
 
+// Home index page
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
-Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::auth();
