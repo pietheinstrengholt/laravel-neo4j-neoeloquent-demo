@@ -192,7 +192,11 @@ class ExcelController extends Controller
 					$subject = Term::where('id',$subject_id)->first();
 					$object = Term::where('id',$object_id)->first();
 
-					$subject->relationship($object)->create(['relation_name' => 'has a relation to', 'relation_description' => 'has a relation to']);
+					//if both subject and object are found create relation
+					if (!empty($subject) && !empty($subject)) {
+						$subject->relationship($object)->create(['relation_name' => 'has a relation to', 'relation_description' => 'has a relation to']);
+					}
+
 				}
 			}
 		}
