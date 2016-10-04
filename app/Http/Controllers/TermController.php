@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Term;
 use App\User;
+use App\Relation;
 use Auth;
 use Redirect;
 
@@ -33,7 +34,8 @@ class TermController extends Controller
 
 	public function create(Term $term, Request $request)
 	{
-		return view('terms.create');
+		$terms = Term::orderBy('term_name', 'asc')->get();
+		return view('terms.create', compact('terms'));
 	}
 
 	public function store(Request $request)
@@ -45,8 +47,20 @@ class TermController extends Controller
 		]);
 
 		$user = User::find(Auth::user()->id);
+
+		//create two terms
 		$term = Term::create(['term_name' => $request->input('term_name'), 'term_definition' => $request->input('term_definition')]);
+
+		//attach new term to user
 		$user->terms()->attach($term);
+
+		//if object has been set, create relation
+		if ($request->has('object_id')) {
+			if ($request->input('object_id') <> 0) {
+				$object = Term::where('id',$request->input('object_id'))->first();
+				$term->relationship($object)->create(['relation_name' => 'has a relation to', 'relation_description' => 'has a relation to']);
+			}
+		}
 
 		return Redirect::to('/terms/')->with('message', 'Term created.');
 	}
