@@ -27,3 +27,8 @@ Route::bind('terms', function($value, $route) {
 
 //Model routes
 Route::resource('terms', 'TermController');
+
+// Excel
+Route::get('uploadexcel', ['middleware' => 'auth', 'uses' => 'ExcelController@upload']);
+Route::post('postexcel', ['middleware' => 'auth', 'uses' => 'ExcelController@postexcel']);
+Route::get('downloadexcel', ['middleware' => 'auth', 'uses' => 'ExcelController@download']);

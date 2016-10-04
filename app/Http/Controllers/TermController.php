@@ -46,9 +46,10 @@ class TermController extends Controller
 			'term_definition' => 'required'
 		]);
 
+		//find user
 		$user = User::find(Auth::user()->id);
 
-		//create two terms
+		//create term
 		$term = Term::create(['term_name' => $request->input('term_name'), 'term_definition' => $request->input('term_definition')]);
 
 		//attach new term to user
