@@ -173,27 +173,25 @@ class ExcelController extends Controller
 			$user = User::find(Auth::user()->id);
 
 			foreach ($results['terms'] as $key => $term) {
-
 				//create term
 				$new_term = Term::create(['term_name' => $term['term_name'], 'term_definition' =>  $term['term_definition']]);
 
-				//assign new term id, needed to properly assign ontology at a later stage
-				$LastInsertId = $new_term->id;
-				$results['terms'][$key]['new_term'] = $LastInsertId;
+				//attach new term to user
+				$user->terms()->attach($new_term);
 			}
 
 			if (!empty($results['ontology'])) {
 				foreach ($results['ontology'] as $key => $ontology) {
 
 					//set variables to lookup new term id's
-					$subject_id = $ontology['subject_id'];
-					$object_id = $ontology['object_id'];
+					$subject_name = $results['terms'][$ontology['subject_id']['term_name']];
+					$object_name = $results['terms'][$ontology['object_id']['term_name']];
 
-					$subject = Term::where('id',$subject_id)->first();
-					$object = Term::where('id',$object_id)->first();
+					$subject = Term::where('term_name',$subject_name)->first();
+					$object = Term::where('term_name',$object_name)->first();
 
 					//if both subject and object are found create relation
-					if (!empty($subject) && !empty($subject)) {
+					if (!empty($subject) && !empty($object)) {
 						$subject->relationship($object)->create(['relation_name' => 'has a relation to', 'relation_description' => 'has a relation to']);
 					}
 
