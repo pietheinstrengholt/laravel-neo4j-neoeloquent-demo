@@ -184,8 +184,8 @@ class ExcelController extends Controller
 				foreach ($results['ontology'] as $key => $ontology) {
 
 					//set variables to lookup new term id's
-					$subject_name = $results['terms'][$ontology['subject_id']['term_name']];
-					$object_name = $results['terms'][$ontology['object_id']['term_name']];
+					$subject_name = $results['terms'][$ontology['subject_id']]['term_name'];
+					$object_name = $results['terms'][$ontology['object_id']]['term_name'];
 
 					$subject = Term::where('term_name',$subject_name)->first();
 					$object = Term::where('term_name',$object_name)->first();
