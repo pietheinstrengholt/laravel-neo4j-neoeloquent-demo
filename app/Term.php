@@ -18,6 +18,21 @@ class Term extends NeoEloquent
         return $this->belongsTo('App\User', 'CREATED');
     }
 
+	public function relationship($morph=null)
+	{
+	    return $this->hyperMorph($morph, 'App\Relation', 'RELATION', 'TO');
+	}
+
+	public function object()
+	{
+	    return $this->belongsToMany('App\Term', 'RELATION');
+	}
+
+	public function whichRelation()
+	{
+	    return $this->morphMany('App\Relation','TO');
+	}
+
 }
 
 ?>
